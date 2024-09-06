@@ -6,19 +6,17 @@ public class arrays {
   public arrays() {
     for (int i = 0; i < glider.length; i++) {
       for (int j = 0; j < glider[i].length; j++) {
-        // Initialize all elements to "o"
         glider[i][j] = "o";
       }
     }
 
     for (int i = 0; i < blinker.length; i++) {
       for (int j = 0; j < blinker[i].length; j++) {
-        // Initialize all elements to "o"
         blinker[i][j] = "o";
       }
     }
 
-    // Set specific elements to "x"
+    // Setting the patterns for the arrays
     glider[4][5] = "x";
     glider[6][5] = "x";
     glider[6][4] = "x";
