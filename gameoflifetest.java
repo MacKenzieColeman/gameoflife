@@ -1,4 +1,4 @@
-//package gameoflifetest;
+package gameoflifetest;
 
 public class gameoflifetest {
 	public static void main(String[] args) {
