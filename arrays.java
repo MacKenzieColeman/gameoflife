@@ -17,15 +17,15 @@ public class arrays {
     }
 
     // Setting the patterns for the arrays
-    glider[4][5] = "x";
-    glider[6][5] = "x";
-    glider[6][4] = "x";
-    glider[5][6] = "x";
-    glider[6][6] = "x";
+    glider[4][5] = "\u001B[32mx\u001B[37m";
+    glider[6][5] = "\u001B[32mx\u001B[37m";
+    glider[6][4] = "\u001B[32mx\u001B[37m";
+    glider[5][6] = "\u001B[32mx\u001B[37m";
+    glider[6][6] = "\u001B[32mx\u001B[37m";
 
-    blinker[4][5] = "x";
-    blinker[5][5] = "x";
-    blinker[6][5] = "x";
+    blinker[4][5] = "\u001B[32mx\u001B[37m";
+    blinker[5][5] = "\u001B[32mx\u001B[37m";
+    blinker[6][5] = "\u001B[32mx\u001B[37m";
   }
 
   public String[][] getGlider() {

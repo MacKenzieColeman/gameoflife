@@ -19,6 +19,17 @@ public class lifegame {
       printBlinker(blinker);
     }
 
+    System.out.println("next or previous generation?");
+    System.out.println("n for next, b for previous");
+    String next = scan.nextLine();
+
+    if(next.equals("n")) {
+
+    } else if(next.equals("b")) {
+
+    }
+
+    scan.close();
   }
 
   public static void printGlider(String[][] glider) {
