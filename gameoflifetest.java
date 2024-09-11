@@ -1,4 +1,4 @@
-package gameoflifetest;
+//package gameoflifetest;
 
 public class gameoflifetest {
 
@@ -110,4 +110,3 @@ public class gameoflifetest {
 	}
 
 }
-
