@@ -1,10 +1,20 @@
-//package gameoflifetest;
+import java.util.Scanner;
 
 public class gameoflifetest {
 
 	public static void main(String[] args) {
-		int[][] matrix = new int[10][10];
-		int[][] newmatrix = new int[10][10];
+		
+		//========= GET INITIAL SIZE
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Please input an integer for the size of the grid (n x n): ");
+		int size = scan.nextInt();
+
+		//========= GET GENERATION COUNT
+		System.out.print("Please input the number of generations you'd like displayed: ");
+		int generations = scan.nextInt();
+		
+		int[][] matrix = new int[size][size];
+		int[][] newmatrix = new int[size][size];
 		
 		//========= ASSIGN INITIAL VALUES (set everything to 0)
 		for(int y = 0; y < matrix.length; y++) {
@@ -26,7 +36,7 @@ public class gameoflifetest {
 		System.out.println();
 		
 		//========= Loops 5 times. Goes through each spot, and runs CheckLife() on it
-		for(int times = 0; times <5; times++) {
+		for(int times = 0; times <generations; times++) {
 			
 			for(int y = 0; y<10; y++) {
 				for(int x = 0; x < 10; x++) {
@@ -103,7 +113,12 @@ public class gameoflifetest {
 	public static void PrintMatrix(int[][] matrix) {
 		for (int i = 0; i<matrix.length; i++) { // print matrix
 		    for (int j = 0; j<matrix[0].length; j++) {
-		        System.out.print(matrix[i][j]);
+				if(matrix[i][j] == 1){
+					System.out.print("\u001B[41m" +matrix[i][j] + " ");
+				}
+				else{
+					System.out.print("\u001B[47m" + matrix[i][j] + " ");
+				}
 		    }
 		    System.out.println();
 		}
