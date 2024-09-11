@@ -21,13 +21,42 @@ public class gameoflifetest {
 				matrix[y][x] = 0;
 			}
 		}
+    System.out.print("Would you like to chose the Glider formation or the Blinker formation? \n1. Glider \n2. Blinker \n3. Custom \n");
+    int formation = scan.nextInt();
+    if(formation == 1) {
 		//========= GLIDER TEST
-		matrix[2][1] = 1;
-		matrix[3][2] = 1;
-		matrix[3][3] = 1;
-		matrix[1][3] = 1;
-		matrix[2][3] = 1;
-		matrix[3][3] = 1;
+		  matrix[2][1] = 1;
+		  matrix[3][2] = 1;
+		  matrix[3][3] = 1;
+		  matrix[1][3] = 1;
+		  matrix[2][3] = 1;
+		  matrix[3][3] = 1;
+    } else if(formation == 2) {
+    //========= BLINKER TEST
+      matrix[2][2] = 1;
+      matrix[2][3] = 1;
+      matrix[2][4] = 1;
+    } else if(formation == 3) {
+      System.out.println("Please enter 6 pairs of coordinates");
+      int matrix11 = scan.nextInt();
+      int matrix12 = scan.nextInt();
+      int matrix21 = scan.nextInt();
+      int matrix22 = scan.nextInt();
+      int matrix31 = scan.nextInt();
+      int matrix32 = scan.nextInt();
+      int matrix41 = scan.nextInt();
+      int matrix42 = scan.nextInt();
+      int matrix51 = scan.nextInt();
+      int matrix52 = scan.nextInt();
+      int matrix61 = scan.nextInt();
+      int matrix62 = scan.nextInt();
+      matrix[matrix11][matrix12] = 1;
+      matrix[matrix21][matrix22] = 1;
+      matrix[matrix31][matrix32] = 1;
+      matrix[matrix41][matrix42] = 1;
+      matrix[matrix51][matrix52] = 1;
+      matrix[matrix61][matrix62] = 1;
+    }
 
 		//========= PRINT INITIAL STATE
 		PrintMatrix(matrix);
@@ -110,23 +139,15 @@ public class gameoflifetest {
 
 	public static void PrintMatrix(int[][] matrix) {
 		for (int i = 0; i<matrix.length; i++) { // print matrix
-		    for (int j = 0; j<matrix[0].length; j++) {
+		  for (int j = 0; j<matrix[0].length; j++) {
 				if(matrix[i][j] == 1){
-					System.out.print("\u001B[41m" +matrix[i][j] + " ");
+					System.out.print("\u001B[32m" +matrix[i][j] + " ");
 				}
 				else{
-					System.out.print("\u001B[47m" + matrix[i][j] + " ");
+					System.out.print("\u001B[37m" + matrix[i][j] + " ");
 				}
-		    }
-		    System.out.println();
+		  }
+		  System.out.println();
 		}
   }
-// 	public static void PrintMatrix(int[][] matrix) {
-// 		for (int i = 0; i<matrix.length; i++) { // print matrix
-// 		  for (int j = 0; j<matrix[0].length; j++) {
-// 	      System.out.print(matrix[i][j] + " ");
-// 		  }
-// 		  System.out.println();
-// 		}
-// 	}
 }
