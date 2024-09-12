@@ -77,7 +77,7 @@ public class gameoflifetest {
 			if(next.equals("n")) {
 				generation++;
 			}
-			if(next.equals("b")) {
+			if(next.equals("b") && generation>0) {
 				generation--;
 			}
 			if(next.equals("q")) {
