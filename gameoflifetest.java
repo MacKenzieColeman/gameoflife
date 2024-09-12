@@ -68,12 +68,11 @@ public class gameoflifetest {
 		}
 
 		String next = "";
-		Scanner newScanner = new Scanner(System.in);
 		while(stillRunning){
-			PrintGeneration(generation, size, matrix);
+			PrintGeneration(generation, size, firstmatrix);
 			
 			System.out.println("n for next, b for previous, q to quit.");
-			next = newScanner.nextLine();
+			next = scan.nextLine();
 
 			if(next.equals("n")) {
 				generation++;
@@ -81,7 +80,7 @@ public class gameoflifetest {
 			if(next.equals("b")) {
 				generation--;
 			} 
-			else{
+			if(next.equals("q")) {
 				stillRunning = false;
 			}
 		}
@@ -157,6 +156,8 @@ public class gameoflifetest {
    public static void PrintGeneration(int generation, int size, int[][] matrix)
    {
 		int[][] newmatrix = new int[size][size];//makes a copy of the matrix
+		int[][] tempMatrix = new int[size][size];//makes a copy of the matrix
+		
 		for (int y = 0; y < 10; y++) {
 			for (int x = 0; x < 10; x++) {
 			newmatrix[y][x] = matrix[y][x];
@@ -164,14 +165,14 @@ public class gameoflifetest {
 		}
 
 		for(int g = 0; g <= generation; g++){ //runs through game of life until it gets to desired generation
-			for(int y = 0; y<size; y++) { //looking at original matrix, but printing live/dead states to newmatrix
+			for(int y = 0; y<size; y++) { //looking at original matrix (saved as newmatrix), but printing live/dead states to tempmatrix
 				for(int x = 0; x < size; x++) {
-					newmatrix[y][x] = CheckLife(matrix, y, x);
+					tempMatrix[y][x] = CheckLife(newmatrix, y, x);
 				}
 			}
 			for (int y = 0; y < 10; y++) { //sets the old matrix to the new one
 				for (int x = 0; x < 10; x++) {
-				matrix[y][x] = newmatrix[y][x];
+				newmatrix[y][x] = tempMatrix[y][x];
 				}
 			}
 		}
