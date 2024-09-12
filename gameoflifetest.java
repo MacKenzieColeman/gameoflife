@@ -37,6 +37,7 @@ public class gameoflifetest {
       matrix[2][3] = 1;
       matrix[2][4] = 1;
     } else if(formation == 3) {
+    //========= CUSTOM TEST
       System.out.println("Please enter 6 pairs of coordinates");
       int matrix11 = scan.nextInt();
       int matrix12 = scan.nextInt();
@@ -81,6 +82,7 @@ public class gameoflifetest {
         }
       }
 		}
+    scan.close();
 	}
 
 	//========= Checks nearby squares. First sees if they exist, then checks if they're alive.
