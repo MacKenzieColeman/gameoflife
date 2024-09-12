@@ -84,6 +84,7 @@ public class gameoflifetest {
 				stillRunning = false;
 			}
 		}
+    scan.close();
 	}
 
 	//========= Checks nearby squares. First sees if they exist, then checks if they're alive.
