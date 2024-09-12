@@ -23,7 +23,7 @@ public class gameoflifetest {
 				matrix[y][x] = 0;
 			}
 		}
-    	System.out.print("Would you like to chose the Glider formation or the Blinker formation? \n1. Glider \n2. Blinker \n3. Custom \n");
+    	System.out.print("Would you like to chose the Glider formation, the Blinker formation, or a Custom formation? \n1. Glider \n2. Blinker \n3. Custom \n");
     	int formation = scan.nextInt();
     	if(formation == 1) {
 			//========= GLIDER TEST
