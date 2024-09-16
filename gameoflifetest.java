@@ -61,14 +61,15 @@ public class gameoflifetest {
 			matrix[matrix61][matrix62] = 1;
     	}
 
-		for (int y = 0; y < 10; y++) { //====== Sets the first state
-			for (int x = 0; x < 10; x++) {
+		for (int y = 0; y < size; y++) { //====== Sets the first state
+			for (int x = 0; x < size; x++) {
 			  firstmatrix[y][x] = matrix[y][x];
 			}
 		}
 
 		String next = "";
 		while(stillRunning){
+			System.out.print("\n\n=== GENERATION ["+ generation+"] ===\n");
 			PrintGeneration(generation, size, firstmatrix);
 
 			System.out.println("n for next, b for previous, q to quit.");
@@ -100,7 +101,7 @@ public class gameoflifetest {
 			total = total+1;
 		}
 
-		if(y-1 != -1 && x+1 != 10 && matrix[y-1][x+1]==1) { //top right
+		if(y-1 != -1 && x+1 != matrix[0].length && matrix[y-1][x+1]==1) { //top right
 			total = total+1;
 		}
 
@@ -108,19 +109,19 @@ public class gameoflifetest {
 			total = total+1;
 		}
 
-		if(x+1 != 10 && matrix[y][x+1]==1) { //right
+		if(x+1 != matrix[0].length && matrix[y][x+1]==1) { //right
 			total = total+1;
 		}
 
-		if(y+1 != 10 && x-1 != -1 && matrix[y+1][x-1]==1) { //bottom left
+		if(y+1 != matrix[0].length && x-1 != -1 && matrix[y+1][x-1]==1) { //bottom left
 			total = total+1;
 		}
 
-		if(y+1 != 10 && matrix[y+1][x]==1) { //bottom
+		if(y+1 != matrix[0].length && matrix[y+1][x]==1) { //bottom
 			total = total+1;
 		}
 
-		if(y+1 != 10 && x+1 != 10 && matrix[y+1][x+1]==1) { //bottom right
+		if(y+1 != matrix[0].length && x+1 != matrix[0].length && matrix[y+1][x+1]==1) { //bottom right
 			total = total+1;
 		}
 
@@ -159,8 +160,8 @@ public class gameoflifetest {
 		int[][] newmatrix = new int[size][size];//makes a copy of the matrix
 		int[][] tempMatrix = new int[size][size];//makes a copy of the matrix
 
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
+		for (int y = 0; y < size; y++) {
+			for (int x = 0; x < size; x++) {
 			newmatrix[y][x] = matrix[y][x];
 			}
 		}
@@ -171,8 +172,8 @@ public class gameoflifetest {
 					tempMatrix[y][x] = CheckLife(newmatrix, y, x);
 				}
 			}
-			for (int y = 0; y < 10; y++) { //sets the old matrix to the new one
-				for (int x = 0; x < 10; x++) {
+			for (int y = 0; y < size; y++) { //sets the old matrix to the new one
+				for (int x = 0; x < size; x++) {
 				newmatrix[y][x] = tempMatrix[y][x];
 				}
 			}
