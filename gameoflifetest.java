@@ -4,27 +4,79 @@ public class gameoflifetest {
 	public static void main(String[] args) {
 
 		//========= GET INITIAL SIZE
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Please input an integer for the size of the grid (n x n): ");
-		int size = scan.nextInt();
+		Scanner scan = new Scanner(System.in);		
+		int size = 0;
+		while(true){
+			System.out.print("Please input an integer for the size of the grid (n x n): ");
+			
+			if(scan.hasNextInt()){ //checks if theres an int
+				int input = scan.nextInt();  //store input
+				if(input > 0) {  //checks if pos
+					size = input;  //sets it to size
+					break;
+				} else {
+					System.out.println("The input must be a positive integer. Please try again. . .");
+				}
+			}
+			else { //if there isnt a proper int
+				System.out.println("That is not a valid input. Please try again. . .");
+				scan.next();  // Consume invalid input
+			}
+		}
 
 		//========= GET GENERATION COUNT
-		System.out.print("Please input the first generation displayed: ");
-		int generation = scan.nextInt();
+		int generation = 0;
+		while(true){
+			System.out.print("Please input the first generation displayed: ");
+			
+			if(scan.hasNextInt()){
+				int input = scan.nextInt();  //store input
+				if(input > 0) {  //checks if pos
+					generation = input;  //sets it to size
+					break;
+				} else {
+					System.out.println("The input must be a positive integer. Please try again. . .");
+				}
+			}
+			else { //if not an integer
+				System.out.println("That is not a valid input. Please try again...");
+				scan.next();  // Consume invalid input
+			}
+		}
 
+		//========= CREATING THE MATRIXS
 		int[][] matrix = new int[size][size];
-		int[][] firstmatrix = new int[size][size]; // === This is the state of the first generation, saved for the PrintGeneration script.
+		int[][] firstmatrix = new int[size][size]; // === This is the SAVED state of the first/starting generation, saved for the PrintGeneration script.
 
-		boolean stillRunning = true;
+		boolean stillRunning = true; //bool that keeps track of if we are still running the program
 
-		//========= ASSIGN INITIAL VALUES (set everything to 0)
+		//========= ASSIGN INITIAL VALUES (set everything in matrix to 0)
 		for(int y = 0; y < matrix.length; y++) {
 			for(int x = 0; x < matrix[0].length; x++) {
 				matrix[y][x] = 0;
 			}
 		}
-    	System.out.print("Would you like to chose the Glider formation or the Blinker formation? \n1. Glider \n2. Blinker \n3. Custom \n");
-    	int formation = scan.nextInt();
+
+		//========= FIRST FORMATION (start with a glider, blinker, or something custom)
+    	int formation = 0;
+		while(true){
+			System.out.print("Would you like to chose the Glider formation, the Blinker formation, or a Custom formation? \n1. Glider \n2. Blinker \n3. Custom \n");
+			
+			if(scan.hasNextInt()){
+				int input = scan.nextInt();  //Store input
+				if(input == 1||input==2||input==3) {  //Checks if the value is acceptable
+					formation = input;  //sets it to size
+					break;
+				} else {
+					System.out.println("The input must be 1, 2, or 3. Please try again. . .");
+				}
+			}
+			else {
+				System.out.println("That is not a valid input. Please try again...");
+				scan.next();  // Consume invalid input
+			}
+		}
+
     	if(formation == 1) {
 			//========= GLIDER TEST
 			matrix[2][1] = 1;
@@ -40,7 +92,7 @@ public class gameoflifetest {
       		matrix[2][4] = 1;
     	} else if(formation == 3) {
     		//========= CUSTOM TEST
-      		System.out.println("Please enter 6 pairs of coordinates");
+      		System.out.println("Please enter 6 pairs of coordinates, inputed one by one (EX: 1 [enter] 2. This is the coordinate (1,2)");
 			int matrix11 = scan.nextInt();
 			int matrix12 = scan.nextInt();
 			int matrix21 = scan.nextInt();
@@ -67,28 +119,47 @@ public class gameoflifetest {
 			}
 		}
 
+		//========= LOOP FOR GOING THROUGH GENERATIONS
 		String next = "";
 		while(stillRunning){
 			System.out.print("\n\n=== GENERATION ["+ generation+"] ===\n");
-			PrintGeneration(generation, size, firstmatrix);
-			
-			System.out.println("n for next, b for previous, q to quit.");
-			next = scan.nextLine();
+			PrintGeneration(generation, size, firstmatrix); //Prints the matrix at the corresponding generation
+			next = "";
 
+			while(true){
+				System.out.println("\u001B[37mn for next, b for previous, q to quit.");
+				
+				if(scan.hasNextLine()){
+					String strInput = scan.nextLine();  //Store input
+					if(strInput.equals("n")||strInput.equals("b")||strInput.equals("q")) {  //Checks if an acceptable answer
+						next = strInput;
+						break;
+					} else {
+						System.out.println("The input must be 'n', 'b', or 'q'. Please try again. . .");
+					}
+				}
+				else {
+					System.out.println("That is not a valid input. Please try again...");
+					scan.next();  // Consume invalid input
+				}
+			}
+			
+			//Handles what operation should be done next
 			if(next.equals("n")) {
 				generation++;
-			} 
+			}
 			if(next.equals("b") && generation>0) {
 				generation--;
-			} 
+			}
 			if(next.equals("q")) {
 				stillRunning = false;
 			}
 		}
+    scan.close();
 	}
 
 	//========= Checks nearby squares. First sees if they exist, then checks if they're alive.
-	//========= Returns 1 or 0 depending on if the spot should be alive or dead
+	//========= Method returns 1 or 0 depending on if the spot should be alive or dead
 	public static int CheckLife(int[][] matrix, int y, int x) {
 		int total = 0;
 
@@ -124,8 +195,7 @@ public class gameoflifetest {
 			total = total+1;
 		}
 
-
-		//========= To die or not to die :)
+		//========= To die or not to die :) The total is the amount of live squares surrounding the coordinate
 		if(total>3) { //dies of overcrowding
 			return 0;
 		}
@@ -140,6 +210,7 @@ public class gameoflifetest {
 		}
 	}
 
+	// This method takes in a matrix, and prints it out properly- making all the 1s a different color.
 	public static void PrintMatrix(int[][] matrix) {
 		for (int i = 0; i<matrix.length; i++) { // print matrix
 		  for (int j = 0; j<matrix[0].length; j++) {
@@ -156,9 +227,9 @@ public class gameoflifetest {
 
    public static void PrintGeneration(int generation, int size, int[][] matrix)
    {
-		int[][] newmatrix = new int[size][size];//makes a copy of the matrix
-		int[][] tempMatrix = new int[size][size];//makes a copy of the matrix
-		
+		int[][] newmatrix = new int[size][size]; // this will be a copy of the current matrix
+		int[][] tempMatrix = new int[size][size]; //this temp matrix is used to save the spot, so it can calculate the next generation in line.
+
 		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
 			newmatrix[y][x] = matrix[y][x];
