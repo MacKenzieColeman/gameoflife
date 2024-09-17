@@ -4,17 +4,17 @@ import java.util.Scanner;
  * The Game of Life
  * Benjamin and MacKenzie
  * Finished: September 17th, 2024
- * 
+ *
  */
 
 public class gameoflifeproject {
 	public static void main(String[] args) {
 		//========= GETS SIZE OF GRID
-		Scanner scan = new Scanner(System.in);		
+		Scanner scan = new Scanner(System.in);
 		int size = 0;
 		while(true){ //Escapes the while loop when the user inputs an acceptable input
 			System.out.print("\u001B[33mPlease input an integer for the size of the grid n (Where the grid is n x n): \u001B[37m");
-			
+
 			if(scan.hasNextInt()){ //checks if theres an inputted int
 				int input = scan.nextInt();  //store input
 				if(input > 0) {  //checks if its a positive number
@@ -34,7 +34,7 @@ public class gameoflifeproject {
 		int generation = 0;
 		while(true){ //Escapes the while loop when the user inputs an acceptable input
 			System.out.print("\u001B[33mPlease input the first generation displayed: \u001B[37m");
-			
+
 			if(scan.hasNextInt()){
 				int input = scan.nextInt();  //stores input
 				if(input > 0) {  //checks if its above 0, because the first possible generation count is 1
@@ -61,7 +61,7 @@ public class gameoflifeproject {
     	int formation = 0;
 		while(true){
 			System.out.print("\u001B[33mChoose either to start with the Glider formation, the Blinker formation, or a Custom formation. \u001B[34m\n1 = Glider \n2 = Blinker \n3 = Custom \n \u001B[37m");
-			
+
 			if(scan.hasNextInt()){
 				int input = scan.nextInt();  //Store input
 				if(input == 1||input==2||input==3) {  //Checks if the value is one of the formations
@@ -93,7 +93,7 @@ public class gameoflifeproject {
 			while(true)//Loops to allow as many custom points as possible
 			{
 				System.out.print("\u001B[33mInput coordinates, one number at a time (y [enter] x). Whenever you are done, input (-1) or any number outside the array's range: \u001B[37m");
-			
+
 				if(scan.hasNextInt()){
 					int input = scan.nextInt();  //store input
 					if(input < 0 || input >= size )break; //if its an exit input, exit the loop
@@ -139,7 +139,7 @@ public class gameoflifeproject {
 					System.out.println("\u001B[31mThe input must be 'n', 'b', or 'q'. Please try again. . .");
 				}
 			}
-			
+
 			//Handles what operation should be done next
 			if(next.equals("n")) {
 				generation++;

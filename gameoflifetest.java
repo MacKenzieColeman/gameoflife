@@ -4,7 +4,7 @@ import java.util.Scanner;
  * The Game of Life
  * Benjamin and MacKenzie
  * Finished: September 17th, 2024
- * 
+ *
  */
 
 public class gameoflifetest {
