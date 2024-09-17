@@ -1,8 +1,14 @@
 import java.util.Scanner;
 
+/*
+ * Game of Life
+ * Benjamin and MacKenzie
+ * Finished: September 17th, 2024
+ * 
+ */
+
 public class gameoflifetest {
 	public static void main(String[] args) {
-
 		//========= GET INITIAL SIZE
 		Scanner scan = new Scanner(System.in);		
 		int size = 0;
@@ -144,7 +150,7 @@ public class gameoflifetest {
 		//========= LOOP FOR GOING THROUGH GENERATIONS
 		String next = "";
 		while(stillRunning){
-			System.out.print("\n\n=== GENERATION ["+ (generation+1)+"] ===\n");
+			System.out.print("\n\n=== GENERATION ["+ (generation)+"] ===\n");
 			PrintGeneration(generation, size, firstmatrix); //Prints the matrix at the corresponding generation
 			next = "";
 
@@ -163,7 +169,7 @@ public class gameoflifetest {
 			if(next.equals("n")) {
 				generation++;
 			}
-			if(next.equals("b") && generation>0) {
+			if(next.equals("b") && generation>1) {
 				generation--;
 			}
 			if(next.equals("q")) {
@@ -251,7 +257,7 @@ public class gameoflifetest {
 			}
 		}
 
-		for(int g = 0; g <= generation; g++){ //runs through game of life until it gets to desired generation
+		for(int g = 1; g < generation; g++){ //runs through game of life until it gets to desired generation
 			for(int y = 0; y<size; y++) { //looking at original matrix (saved as newmatrix), but printing live/dead states to tempmatrix
 				for(int x = 0; x < size; x++) {
 					tempMatrix[y][x] = CheckLife(newmatrix, y, x);
