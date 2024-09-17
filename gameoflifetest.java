@@ -92,25 +92,47 @@ public class gameoflifetest {
       		matrix[2][4] = 1;
     	} else if(formation == 3) {
     		//========= CUSTOM TEST
-      		System.out.println("Please enter 6 pairs of coordinates, inputed one by one (EX: 1 [enter] 2. This is the coordinate (1,2)");
-			int matrix11 = scan.nextInt();
-			int matrix12 = scan.nextInt();
-			int matrix21 = scan.nextInt();
-			int matrix22 = scan.nextInt();
-			int matrix31 = scan.nextInt();
-			int matrix32 = scan.nextInt();
-			int matrix41 = scan.nextInt();
-			int matrix42 = scan.nextInt();
-			int matrix51 = scan.nextInt();
-			int matrix52 = scan.nextInt();
-			int matrix61 = scan.nextInt();
-			int matrix62 = scan.nextInt();
-			matrix[matrix11][matrix12] = 1;
-			matrix[matrix21][matrix22] = 1;
-			matrix[matrix31][matrix32] = 1;
-			matrix[matrix41][matrix42] = 1;
-			matrix[matrix51][matrix52] = 1;
-			matrix[matrix61][matrix62] = 1;
+			while(true)
+			{
+				System.out.print("Input coordinates, one number at a time (y [enter] x). Whenever you are done, input (-1) or any number outside the array's range: ");
+			
+				if(scan.hasNextInt()){
+					int input = scan.nextInt();  //store input
+					if(input < 0 || input >= size )break;
+
+					if(scan.hasNextInt()){
+						int input2 = scan.nextInt();
+						if(input2 < 0 || input2 >= size )break;
+
+						matrix[input][input2] = 1;
+						System.out.println("Created alive space at: y= " + input +" | x= "+input2);
+					}
+				}
+				else { //if not an integer
+					System.out.println("That is not a valid input. Please try again...");
+					scan.next();  // Consume invalid input
+				}
+			}
+
+      		// System.out.println("Please enter 6 pairs of coordinates, inputed one by one (EX: 1 [enter] 2. This is the coordinate (1,2)");
+			// int matrix11 = scan.nextInt();
+			// int matrix12 = scan.nextInt();
+			// int matrix21 = scan.nextInt();
+			// int matrix22 = scan.nextInt();
+			// int matrix31 = scan.nextInt();
+			// int matrix32 = scan.nextInt();
+			// int matrix41 = scan.nextInt();
+			// int matrix42 = scan.nextInt();
+			// int matrix51 = scan.nextInt();
+			// int matrix52 = scan.nextInt();
+			// int matrix61 = scan.nextInt();
+			// int matrix62 = scan.nextInt();
+			// matrix[matrix11][matrix12] = 1;
+			// matrix[matrix21][matrix22] = 1;
+			// matrix[matrix31][matrix32] = 1;
+			// matrix[matrix41][matrix42] = 1;
+			// matrix[matrix51][matrix52] = 1;
+			// matrix[matrix61][matrix62] = 1;
     	}
 
 		for (int y = 0; y < size; y++) { //====== Sets the first state
@@ -122,25 +144,18 @@ public class gameoflifetest {
 		//========= LOOP FOR GOING THROUGH GENERATIONS
 		String next = "";
 		while(stillRunning){
-			System.out.print("\n\n=== GENERATION ["+ generation+"] ===\n");
+			System.out.print("\n\n=== GENERATION ["+ (generation+1)+"] ===\n");
 			PrintGeneration(generation, size, firstmatrix); //Prints the matrix at the corresponding generation
 			next = "";
 
 			while(true){
 				System.out.println("\u001B[37mn for next, b for previous, q to quit.");
-				
-				if(scan.hasNextLine()){
-					String strInput = scan.nextLine();  //Store input
-					if(strInput.equals("n")||strInput.equals("b")||strInput.equals("q")) {  //Checks if an acceptable answer
-						next = strInput;
-						break;
-					} else {
-						System.out.println("The input must be 'n', 'b', or 'q'. Please try again. . .");
-					}
-				}
-				else {
-					System.out.println("That is not a valid input. Please try again...");
-					scan.next();  // Consume invalid input
+				String strInput = scan.nextLine();  //Store input
+				if(strInput.equals("n")||strInput.equals("b")||strInput.equals("q")) {  //Checks if an acceptable answer
+					next = strInput;
+					break;
+				} else {
+					System.out.println("The input must be 'n', 'b', or 'q'. Please try again. . .");
 				}
 			}
 			
