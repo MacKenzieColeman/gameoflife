@@ -7,15 +7,15 @@ import java.util.Scanner;
  * 
  */
 
-public class gameoflifetest {
+public class gameoflifeproject {
 	public static void main(String[] args) {
-		//========= GET INITIAL SIZE
-		Scanner scan = new Scanner(System.in);
+		//========= GETS SIZE OF GRID
+		Scanner scan = new Scanner(System.in);		
 		int size = 0;
-		while(true){
-			System.out.print("Please input an integer for the size of the grid (n x n): ");
-
-			if(scan.hasNextInt()){ //checks if theres an int
+		while(true){ //Escapes the while loop when the user inputs an acceptable input
+			System.out.print("\u001B[33mPlease input an integer for the size of the grid n (Where the grid is n x n): \u001B[37m");
+			
+			if(scan.hasNextInt()){ //checks if theres an inputted int
 				int input = scan.nextInt();  //store input
 				if(input > 0) {  //checks if its a positive number
 					size = input;  //sets size to the input
@@ -32,9 +32,9 @@ public class gameoflifetest {
 
 		//========= GET GENERATION COUNT
 		int generation = 0;
-		while(true){
-			System.out.print("Please input the first generation displayed: ");
-
+		while(true){ //Escapes the while loop when the user inputs an acceptable input
+			System.out.print("\u001B[33mPlease input the first generation displayed: \u001B[37m");
+			
 			if(scan.hasNextInt()){
 				int input = scan.nextInt();  //stores input
 				if(input > 0) {  //checks if its above 0, because the first possible generation count is 1
@@ -60,8 +60,8 @@ public class gameoflifetest {
 		//========= FIRST FORMATION (start with a glider, blinker, or custom points)
     	int formation = 0;
 		while(true){
-			System.out.print("Would you like to chose the Glider formation, the Blinker formation, or a Custom formation? \n1. Glider \n2. Blinker \n3. Custom \n");
-
+			System.out.print("\u001B[33mChoose either to start with the Glider formation, the Blinker formation, or a Custom formation. \u001B[34m\n1 = Glider \n2 = Blinker \n3 = Custom \n \u001B[37m");
+			
 			if(scan.hasNextInt()){
 				int input = scan.nextInt();  //Store input
 				if(input == 1||input==2||input==3) {  //Checks if the value is one of the formations
@@ -77,25 +77,23 @@ public class gameoflifetest {
 			}
 		}
 
-    	if(formation == 1) {
-			//========= GLIDER TEST
+    	if(formation == 1) { //========= GLIDER
 			matrix[2][1] = 1;
 			matrix[3][2] = 1;
 			matrix[3][3] = 1;
 			matrix[1][3] = 1;
 			matrix[2][3] = 1;
 			matrix[3][3] = 1;
-    	} else if(formation == 2) {
-    		//========= BLINKER TEST
+    	} else if(formation == 2) { //========= BLINKER
       		matrix[2][2] = 1;
       		matrix[2][3] = 1;
       		matrix[2][4] = 1;
-    	} else if(formation == 3) {
-    		//========= CUSTOM TEST
-			while(true)
-			{
-				System.out.print("Input coordinates, one number at a time (y [enter] x). Whenever you are done, input (-1) or any number outside the array's range: ");
+    	} else if(formation == 3) { //========= CUSTOM
 
+			while(true)//Loops to allow as many custom points as possible
+			{
+				System.out.print("\u001B[33mInput coordinates, one number at a time (y [enter] x). Whenever you are done, input (-1) or any number outside the array's range: \u001B[37m");
+			
 				if(scan.hasNextInt()){
 					int input = scan.nextInt();  //store input
 					if(input < 0 || input >= size )break; //if its an exit input, exit the loop
@@ -105,7 +103,7 @@ public class gameoflifetest {
 						if(input2 < 0 || input2 >= size )break; //if its an exit input, exit the loop
 
 						matrix[input][input2] = 1;
-						System.out.println("\u001B[32mCreated alive space at: y= " + input +" | x= "+input2 + "\u001B[37m");
+						System.out.println("\u001B[32mCreated alive space at: y= " + input +" | x= "+input2);
 					}
 				}
 				else { //if not an integer
@@ -122,25 +120,26 @@ public class gameoflifetest {
 			}
 		}
 
-    //========= LOOP FOR GOING THROUGH GENERATIONS
-    Scanner scan2 = new Scanner(System.in);
+		//========= LOOP FOR GOING THROUGH GENERATIONS
 		String next = "";
+		scan.nextLine();
 		while(stillRunning){
 			System.out.print("\n\n\u001B[34m=== GENERATION ["+ (generation)+"] ===\n"); //Title to show user what generation they're on
 			PrintGeneration(generation, size, firstmatrix); //Prints the matrix at the corresponding generation
 			next = "";
 
 			while(true){
-				System.out.println("\u001B[37mn for next, b for previous, q to quit.");
-				String strInput = scan2.nextLine();  //Store input
-				if(strInput.equals("n")||strInput.equals("b")||strInput.equals("q")) {  //Checks if an acceptable answer
+				System.out.println("\u001B[33mn for next | b for previous | q to quit.\u001B[37m");
+				String strInput = scan.nextLine();  //Store input
+
+				if(strInput.equals("n")||strInput.equals("b")||strInput.equals("q")) {  //Checks if its an acceptable answer (n, b, or q)
 					next = strInput;
 					break;
 				} else {
-					System.out.println("The input must be 'n', 'b', or 'q'. Please try again. . .");
+					System.out.println("\u001B[31mThe input must be 'n', 'b', or 'q'. Please try again. . .");
 				}
 			}
-
+			
 			//Handles what operation should be done next
 			if(next.equals("n")) {
 				generation++;
@@ -152,7 +151,6 @@ public class gameoflifetest {
 				stillRunning = false; //Stops the while loop, and exits
 			}
 		}
-    scan2.close();
     scan.close(); //Closes the scanner then finishes the program
 	}
 
@@ -213,7 +211,7 @@ public class gameoflifetest {
 		for (int i = 0; i<matrix.length; i++) { // print matrix
 		  for (int j = 0; j<matrix[0].length; j++) {
 				if(matrix[i][j] == 1){
-					System.out.print("\u001B[32m" +matrix[i][j] + " \u001B[37m");
+					System.out.print("\u001B[32m" +matrix[i][j] + " ");
 				}
 				else{
 					System.out.print("\u001B[37m" + matrix[i][j] + " ");
@@ -221,8 +219,9 @@ public class gameoflifetest {
 		  }
 		  System.out.println();
 		}
-  }
+   }
 
+   // This method takes a generation number, the size of a matrix, and the matrix itself. Then, it prints whatever generation the user asked for!
    public static void PrintGeneration(int generation, int size, int[][] matrix)
    {
 		int[][] newmatrix = new int[size][size]; // this will be a copy of the current matrix
@@ -234,7 +233,7 @@ public class gameoflifetest {
 			}
 		}
 
-		for(int g = 0; g <= generation; g++){ //runs through game of life until it gets to desired generation
+		for(int g = 1; g < generation; g++){ //runs through game of life until it gets to desired generation
 			for(int y = 0; y<size; y++) { //looking at original matrix (saved as newmatrix), but printing live/dead states to tempmatrix
 				for(int x = 0; x < size; x++) {
 					tempMatrix[y][x] = CheckLife(newmatrix, y, x);
@@ -242,10 +241,10 @@ public class gameoflifetest {
 			}
 			for (int y = 0; y < size; y++) { //sets the old matrix to the new one
 				for (int x = 0; x < size; x++) {
-				  newmatrix[y][x] = tempMatrix[y][x];
+				newmatrix[y][x] = tempMatrix[y][x];
 				}
 			}
 		}
-		PrintMatrix(newmatrix); //prints new matrix
+		PrintMatrix(newmatrix); //prints the new matrix at the desired generation
    }
 }
