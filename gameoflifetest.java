@@ -104,7 +104,7 @@ public class gameoflifetest {
 						if(input2 < 0 || input2 >= size )break; //if its an exit input, exit the loop
 
 						matrix[input][input2] = 1;
-						System.out.println("\u001B[32mCreated alive space at: y= " + input +" | x= "+input2);
+						System.out.println("\u001B[32mCreated alive space at: y= " + input +" | x= "+input2 + "\u001B[37m");
 					}
 				}
 				else { //if not an integer
@@ -121,7 +121,8 @@ public class gameoflifetest {
 			}
 		}
 
-		//========= LOOP FOR GOING THROUGH GENERATIONS
+    //========= LOOP FOR GOING THROUGH GENERATIONS
+    Scanner scan2 = new Scanner(System.in);
 		String next = "";
 		while(stillRunning){
 			System.out.print("\n\n\u001B[34m=== GENERATION ["+ (generation)+"] ===\n"); //Title to show user what generation they're on
@@ -130,7 +131,7 @@ public class gameoflifetest {
 
 			while(true){
 				System.out.println("\u001B[37mn for next, b for previous, q to quit.");
-				String strInput = scan.nextLine();  //Store input
+				String strInput = scan2.nextLine();  //Store input
 				if(strInput.equals("n")||strInput.equals("b")||strInput.equals("q")) {  //Checks if an acceptable answer
 					next = strInput;
 					break;
@@ -150,6 +151,7 @@ public class gameoflifetest {
 				stillRunning = false; //Stops the while loop, and exits
 			}
 		}
+    scan2.close();
     scan.close(); //Closes the scanner then finishes the program
 	}
 
